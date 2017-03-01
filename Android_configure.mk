@@ -7,12 +7,11 @@ LOCAL_PATH:=$(call my-dir)
 include $(CLEAR_VARS)
 
 
-
 # Use $(ANDROID_TOOLCHAIN) for library configuration
 NDK_CROSS_PREFIX := $(subst -gcc,-,$(shell (ls $(ANDROID_TOOLCHAIN)/*gcc)))
 
 # Always select highest NDK and SDK version
-NDK_SYSROOT := $(ANDROID_BUILD_TOP)/$(shell (ls -dv prebuil*/ndk/android-ndk-r*/platforms/android-*/arch-$(TARGET_ARCH) | tail -1))
+NDK_SYSROOT := $(shell (ls -dv $(NDK_ROOT)/platforms/$(APP_PLATFORM)/arch-$(TARGET_ARCH) | tail -1))
 
 # Fix for latest master branch
 ifeq ($(NDK_SYSROOT),$(ANDROID_BUILD_TOP)/)
@@ -27,7 +26,7 @@ FF_CONFIGURATION_STRING := \
     --enable-cross-compile \
     --cross-prefix=$(NDK_CROSS_PREFIX) \
     --sysroot=$(NDK_SYSROOT) \
-    --enable-shared \
+    --disable-shared \
     --enable-static \
 
 ifeq ($(VERSION_BRANCH),2.2)
@@ -96,7 +95,7 @@ ifeq ($(TARGET_ARCH),x86)
     FF_CONFIGURATION_STRING += $(FF_DISABLE_MMX) $(FF_DISABLE_MMX2) 
 endif
 
-include $(ANDROID_BUILD_TOP)/build/core/combo/arch/$(TARGET_ARCH)/$(TARGET_ARCH_VARIANT).mk
+#include $(ANDROID_BUILD_TOP)/build/core/combo/arch/$(TARGET_ARCH)/$(TARGET_ARCH_VARIANT).mk
 
 ifeq ($(TARGET_ARCH),arm)
     FF_CONFIGURATION_STRING += --extra-cflags='$(arch_variant_cflags)'

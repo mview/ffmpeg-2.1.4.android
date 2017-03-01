@@ -163,6 +163,7 @@ ifeq ($(CONFIG_AVFORMAT),yes)
         LOCAL_SHARED_LIBRARIES := \
             $(FFLIBS) \
             libz
+	LOCAL_LDLIBS :=-lz
         LOCAL_MODULE_TAGS := optional
         LOCAL_PRELINK_MODULE := false
         LOCAL_MODULE := $(FFNAME)
@@ -183,6 +184,7 @@ ifeq ($(CONFIG_AVFORMAT),yes)
         LOCAL_STATIC_LIBRARIES := \
             $(FFLIBS) \
             libz
+        LOCAL_LDLIBS :=-lz
         LOCAL_MODULE_TAGS := optional
         LOCAL_PRELINK_MODULE := false
         LOCAL_MODULE := $(FFNAME)
@@ -218,6 +220,7 @@ ifeq ($(CONFIG_AVCODEC),yes)
         LOCAL_SHARED_LIBRARIES := \
             $(FFLIBS) \
             libz
+        LOCAL_LDLIBS :=-lz
         LOCAL_ARM_MODE := arm
         LOCAL_MODULE_TAGS := optional
         LOCAL_PRELINK_MODULE := false
@@ -239,6 +242,7 @@ ifeq ($(CONFIG_AVCODEC),yes)
         LOCAL_STATIC_LIBRARIES := \
             $(FFLIBS) \
             libz
+	LOCAL_LDLIBS :=-lz
         LOCAL_ARM_MODE := arm
         LOCAL_MODULE_TAGS := optional
         LOCAL_PRELINK_MODULE := false
@@ -627,6 +631,7 @@ ifeq ($(CONFIG_FFMPEG),yes)
             $(FFMPEG_ROOT_DIR)/$(FFMPEG_CONFIG_DIR)
         LOCAL_SHARED_LIBRARIES := \
             libz
+	LOCAL_LDLIBS :=-lz
         LOCAL_STATIC_LIBRARIES := \
             $(TOOLS_LIBRARIES)
 	LOCAL_MODULE_TAGS := optional
@@ -660,6 +665,7 @@ ifeq ($(CONFIG_FFPROBE),yes)
             $(FFMPEG_ROOT_DIR)/$(FFMPEG_CONFIG_DIR)
         LOCAL_SHARED_LIBRARIES := \
             libz
+	LOCAL_LDLIBS :=-lz 
         LOCAL_STATIC_LIBRARIES := \
             $(TOOLS_LIBRARIES)
         LOCAL_MODULE_TAGS := optional
@@ -683,6 +689,7 @@ ifeq ($(CONFIG_FFSERVER),yes)
         LOCAL_SHARED_LIBRARIES += \
             libdl \
             libz
+        LOCAL_LDLIBS :=-lz -ldl 
         LOCAL_MODULE_TAGS := optional
         LOCAL_MODULE := ffserver$(VERSION_SUFFIX)
         include $(BUILD_EXECUTABLE)
@@ -697,6 +704,7 @@ ifeq ($(CONFIG_FFSERVER),yes)
         LOCAL_SHARED_LIBRARIES := \
             libdl \
             libz
+        LOCAL_LDLIBS :=-lz -ldl
         LOCAL_STATIC_LIBRARIES := \
             $(TOOLS_LIBRARIES)
         LOCAL_MODULE_TAGS := optional
